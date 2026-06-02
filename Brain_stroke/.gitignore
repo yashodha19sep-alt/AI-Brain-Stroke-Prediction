@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual Environment
+environment/
+venv/
+.env
+
+# Django
+db.sqlite3
+
+# ML Models
+*.h5
+*.keras
+*.pkl
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db     
