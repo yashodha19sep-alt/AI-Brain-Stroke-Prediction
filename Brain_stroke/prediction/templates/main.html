@@ -1,0 +1,209 @@
+<!--MAIN PAGE HTML CODE:-->
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main - Disease Predictor</title>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'favicon.svg' %}">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+    <!-- External CSS -->
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+
+<body>
+
+<div class="main-dashboard">
+
+    <!--SIDEBAR--> 
+    <div class="sidebar">
+
+        <!--div class="logo">
+            V
+        </div>
+
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-chart-line"></i>
+        <i class="fa-solid fa-user"></i>
+        <i class="fa-solid fa-folder"></i>
+        <i class="fa-solid fa-gear"></i-->
+
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- TOPBAR -->
+        <div class="topbar">
+
+            <h1>Disease Prediction Dashboard</h1>
+
+            <!--div class="profile">
+                <p>Doctor</p>
+                <img src="https://i.pravatar.cc/100" alt="profile">
+            </div>-->
+
+        </div>
+
+        <!-- DASHBOARD GRID -->
+        <div class="dashboard-grid">
+
+            <!-- LEFT SIDE -->
+            <div class="card upload-card">
+
+                <form method="POST" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+
+                    <!-- DRAG AREA -->
+                    <div class="drag-area">
+
+                        <div class="upload-icon">
+                            <i class="fa-solid fa-file-arrow-up"></i>
+                        </div>
+
+                        <h2>Drag & Drop CT Scan Here</h2>
+
+                        <p>Supports JPG, PNG, DICOM</p>
+
+                        <!-- FILE INPUT -->
+                        <div class="file-input">
+
+                            <input
+                            id="disease_image"
+                            type="file"
+                            name="disease_image"
+                            accept="image/*"
+                            required>
+
+                            <div id="preview-container" style="margin-top:20px; display:none;">
+                                <img
+                                    id="preview-image"
+                                    src=""
+                                    alt="Preview"
+                                    style="
+                                    width:250px;
+                                    border-radius:15px;
+                                    border:2px solid #ccc;
+                                    ">
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                   
+
+                    <!-- ANALYZE BUTTON -->
+                    <button type="submit" class="analyze-btn">
+                        ANALYZE SCAN
+                    </button>
+
+                </form>
+
+            </div>
+
+            <!-- RIGHT SIDE RESULT -->
+            <div class="card result-card">
+
+                <div class="result-header">
+
+                    <h2>Detection AI Result</h2>
+
+                    <div class="status-badge">
+                        Analysis Completed
+                    </div>
+
+                </div>
+
+                {% if prediction %}
+
+                <div class="result-content">
+
+                    <!-- IMAGE PREVIEW -->
+                    <div class="preview-box">
+
+                        {% if image_url %}
+                        <img src="{{ image_url }}" alt="Uploaded image">
+                        {% endif %}
+
+                    </div>
+
+                    <!-- RESULT DETAILS -->
+                    <div class="analysis-box">
+                    
+                        {% if prediction == "Wrong image upload" or prediction == "Invalid Input" %}
+                        
+                            <h1 style="color:red;">
+                            ⚠ Invalid Input
+                            </h1>
+
+                            <p style="font-weight:bold;">
+                            Please upload a valid Brain CT Scan image.
+                            </p>
+                            <p>Supported formats: JPG, PNG</p>
+                            <p>Minimum dimensions: 50x50 pixels</p>
+                            <p>Maximum file size: 10MB</p>
+                        
+                        {% else %}
+                        
+                            <h1>{{ prediction }}</h1>
+
+                            <p>
+                                Uploaded File:
+                                <strong>{{ filename }}</strong>
+                            </p>
+
+                            <div class="confidence">
+                            {{ confidence|floatformat:2 }}%
+                            <span>CONFIDENCE</span>
+                              </div>
+                        
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                {% else %}
+
+                <!-- DEFAULT CONTENT -->
+                <div class="analysis-box">
+
+                    <h1>No Result</h1>
+
+                    <p>
+                        Upload a CT scan image and click
+                        Analyze Scan to view prediction results.
+                    </p>
+
+                </div>
+
+                {% endif %}
+
+                <!-- BACK BUTTON -->
+                <a href="/login/" class="back-link">
+                    ← Back to Login
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="{% static 'javascript1.js' %}"></script>
+
+</body>
+</html>

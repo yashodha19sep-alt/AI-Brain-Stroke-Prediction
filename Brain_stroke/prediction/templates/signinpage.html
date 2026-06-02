@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up Page</title>
+
+    <link rel="icon" href="{% static 'favicon.svg' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}?v=20">
+
+</head>
+
+<body class="signin-page">
+
+<div class="signup-container">
+
+<h2>SIGN UP</h2>
+
+<form method="POST">
+
+{% csrf_token %}
+
+<div class="input-box">
+
+<label>First Name</label>
+
+{{ form.firstname }}
+
+{% if form.firstname.errors %}
+<small class="error-msg">
+{{ form.firstname.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Last Name</label>
+
+{{ form.lastname }}
+
+{% if form.lastname.errors %}
+<small class="error-msg">
+{{ form.lastname.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Phone Number</label>
+
+{{ form.phone }}
+
+{% if form.phone.errors %}
+<small class="error-msg">
+{{ form.phone.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Email</label>
+
+{{ form.email }}
+
+{% if form.email.errors %}
+<small class="error-msg">
+{{ form.email.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Password</label>
+
+{{ form.password }}
+
+{% if form.password.errors %}
+<small class="error-msg">
+{{ form.password.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Confirm Password</label>
+
+{{ form.confirm_password }}
+
+{% if form.confirm_password.errors %}
+<small class="error-msg">
+{{ form.confirm_password.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Gender</label>
+
+{{ form.gender }}
+
+{% if form.gender.errors %}
+<small class="error-msg">
+{{ form.gender.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+
+<div class="input-box">
+
+<label>Date of Birth</label>
+
+{{ form.dob }}
+
+{% if form.dob.errors %}
+<small class="error-msg">
+{{ form.dob.errors.0 }}
+</small>
+{% endif %}
+
+</div>
+
+{% if form.non_field_errors %}
+<small class="error-msg">
+{{ form.non_field_errors }}
+</small>
+{% endif %}
+
+<div class="button-group">
+
+<button type="submit" class="signup-btn">
+Submit
+</button>
+
+<button type="reset" class="cancel-btn">
+Cancel
+</button>
+
+</div>
+
+<p class="login-link">
+
+Already have an account?
+
+<a href="/login/">
+Login
+</a>
+
+</p>
+
+</form>
+
+</div>
+
+</body>
+</html>
